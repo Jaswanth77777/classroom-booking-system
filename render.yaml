@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: spirit-university-classroom-booking
+    runtime: python
+    plan: free
+    buildCommand: python -c "import zipfile; zipfile.ZipFile('spirit_classroom_booking_final.zip').extractall('.')" && pip install -r requirements.txt gunicorn
+    startCommand: gunicorn app:app
+    envVars:
+      - key: CLASSROOM_SECRET_KEY
+        generateValue: true
